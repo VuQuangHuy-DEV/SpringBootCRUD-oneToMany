@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>List Cat</h1>
+		<form action="/cat/search">
+
+
+			<input type="text" name="search"> 
+			
+			<button type="submit" class="btn btn-primary"> Search</button> 
+
+
+		</form>
+
+		<a class="btn btn-success" href="/cat/showAddCatForm">Add a new
+			cat</a>
+
+		<table class="table table-bodered">
+			<thead>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Gender</th>
+				<th>BirtDay</th>
+				<th>Desciption</th>
+				<th>Bread</th>
+				<th>IMG</th>
+				<th>Action</th>
+			</thead>
+			<tbody>
+				<tr th:each="cat:${cats}">
+					<td th:text="${cat.cat_Id}"></td>
+					<td th:text="${cat.cat_Name}"></td>
+
+
+
+
+
+					<td th:if="${cat.cat_Gender == false}">Female</td>
+					<td th:if="${cat.cat_Gender == true}">Male</td>
+
+					<td th:text="${cat.cat_Birthday}"></td>
+					<td th:text="${cat.cat_Description}"></td>
+					<td th:text="${cat.bread.bread_Name}"></td>
+					<td><img width="100" height="100" alt=""
+						th:src="@{${'/Images/' + cat.cat_Image}}"></td>
+
+					<td><a class="btn btn-info"
+						th:href="@{/cat/delete(id=${cat.cat_Id})}">Delete</a> <a
+						class="btn btn-danger "
+						th:href="@{/cat/showUpdateForm(id=${cat.cat_Id})}">Update</a></td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+
+</body>
+</html>
